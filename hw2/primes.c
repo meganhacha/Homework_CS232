@@ -35,7 +35,7 @@ int main(int argc, const char** argv){
             /*setting them to the nearest even number so they don't have any modulo values. 
                          This is a product of sleep deprivation and I'm sure there's a more efficient way*/
         }
-        
+
         if(lowerBound == 1 && upperBound == 1) {
             lowerBound = 4;
             upperBound = lowerBound; 
@@ -68,7 +68,6 @@ int main(int argc, const char** argv){
                 printf("%d \n", i);
             }
         }
-
     }
 
     return 0;
