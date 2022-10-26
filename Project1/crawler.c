@@ -4,12 +4,6 @@
 #include <time.h>
 
 
-/*SIDE NOTE:
-  I ran runTestCases.sh and everything matched up, along with two of the prompts mentioned in the instructions for the project.
-  However, when I tried to do the one with 4 hops and seed #187 (in proj. description), it simply stopped me at hop 2. 
-  In it, hop 2 is supposed to be noted as having a cycle. Not sure why that's not working, but everthing else seems to be.
-*/
-
 
 #define MAX_ADDR_LENGTH 1000
 
@@ -125,26 +119,18 @@ int main(int argc, char** argv){
  *    and returns 0 otherwise
  */
 int contains(const struct listNode *pNode, const char *addr){
-  const struct listNode *temp = pNode;
 
-  char comparisonArray [MAX_ADDR_LENGTH];
+  if(pNode != NULL) {
 
-  for(int i = 0; i < MAX_ADDR_LENGTH; i++) {
-    comparisonArray[i] = addr[i];
+    if(strcmp(pNode->addr, addr) == 0) {
+      return 1;
+    }
+    else {
+      return contains(pNode->next, addr);
+    }
   }
-
-  if(temp != NULL){
-
-      if(strcmp(comparisonArray, temp->addr) == 0) {
-        return 1;
-      }
-      else {
-        contains(temp->next, addr);
-      }
-  }
-  else {
-    return 0;
-  }
+  
+  return 0;
 }
     
 
@@ -155,15 +141,14 @@ int contains(const struct listNode *pNode, const char *addr){
 void insertBack(struct listNode *pNode, const char *addr){
   struct listNode *tempNode = (struct listNode*)malloc(sizeof(struct listNode));
 
-  for(int i =0; i <MAX_ADDR_LENGTH; i++) {
-    tempNode->addr[i] = addr[i];
-  }
+  strcpy(tempNode->addr, addr);
 
   tempNode->next = NULL;
 
+  struct listNode *iteratorNode = pNode;
 
-  if(pNode->next == NULL) {
-    pNode->next = tempNode;
+  if(iteratorNode->next == NULL) {
+    iteratorNode->next = tempNode;
   }
   else {
     insertBack(pNode->next, addr);
