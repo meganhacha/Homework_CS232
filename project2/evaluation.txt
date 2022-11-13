@@ -1,0 +1,5 @@
+My partner (Halie) and I estimate the time spent on this project to be somewhere around or slightly above 15 hours.
+
+We originally planned to break this up by function and strutures, but it became more of a collaborative effort as time went on. Each aspect
+was run by each other before implementing for sure, so we had a combination of doing it on our own time, then seeing if it worked well when we 
+met. Somewhere between pair coding and dividing it up, technically.
