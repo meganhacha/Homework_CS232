@@ -27,33 +27,28 @@ int main(int argc, const char** argv){
     }
   
     {
-        int primeFlag = 0;
+        int notPrime;
 
-        if(upperBound < lowerBound) {
-            lowerBound = 4;
-            upperBound = lowerBound;
-            /*setting them to the nearest even number so they don't have any modulo values. 
-                         This is a product of sleep deprivation and I'm sure there's a more efficient way*/
-        }
+        while(lowerBound <= upperBound) {
+            notPrime = 0;
 
-        for(int i = lowerBound; i <= upperBound; i++) {
-            primeFlag = 1;
-            
-            if(i == 2) {
-                printf("%d\n", i);
+            if(lowerBound <= 1) {
+                lowerBound++;
+                continue;
             }
 
-            for(int j = 2; j <= sqrt(i); j++) {
-                
-                if(i % j == 0) {
-                    primeFlag = 0;
+            for(int i = 2; i <= lowerBound/2; i++) {
+                if(lowerBound % i == 0) {
+                    notPrime = 1;
                     break;
                 }
             }
 
-            if( primeFlag == 1) {
-                printf("%d \n", i);
+            if(notPrime == 0) {
+                printf("%d ", lowerBound);
             }
+
+            lowerBound++;
         }
     }
 
