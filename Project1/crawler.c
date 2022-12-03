@@ -139,16 +139,14 @@ int contains(const struct listNode *pNode, const char *addr){
  *    the list
  */
 void insertBack(struct listNode *pNode, const char *addr){
-  struct listNode *tempNode = (struct listNode*)malloc(sizeof(struct listNode));
 
-  strcpy(tempNode->addr, addr);
+  if(pNode->next == NULL) {
+    struct listNode *tempNode = malloc(sizeof(struct listNode));
 
-  tempNode->next = NULL;
+    strcpy(tempNode->addr, addr);
 
-  struct listNode *iteratorNode = pNode;
-
-  if(iteratorNode->next == NULL) {
-    iteratorNode->next = tempNode;
+    tempNode->next = NULL;
+    pNode->next = tempNode;
   }
   else {
     insertBack(pNode->next, addr);
@@ -174,14 +172,10 @@ void printAddresses(const struct listNode *pNode){
  * frees the memory associated with this node and all subsequent nodes
  */
 void destroyList(struct listNode *pNode){
-    struct listNode *deleteNode = pNode;
-    struct listNode *nextDeleted;
-
-    if(deleteNode != NULL) {
-      nextDeleted = deleteNode->next;
-      free(deleteNode);
-      destroyList(nextDeleted);
-    }
+  if(pNode!=NULL) {
+    destroyList(pNode->next);
+  }
+  free(pNode);
 }
   
 
