@@ -16,11 +16,13 @@ int contains(const struct listNode *pNode, const char *addr){
 }
 
 void insertBack(struct listNode *pNode, const char *addr, int* totalTerms){
+
   if(pNode->next == NULL) {
     struct listNode* tempNode = (struct listNode*)malloc(sizeof(struct listNode));
 
     strncpy(tempNode->addr, addr, strlen(addr));
     tempNode->next = NULL;
+    //Insert the Trie of the indexed page as the root of each newly created linked list node.
     tempNode->root = indexPage(addr, totalTerms);
     pNode->next = tempNode;
   }

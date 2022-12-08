@@ -25,6 +25,7 @@ int main(int argc, char** argv) {
   seed = atol(argv[3]);
   srand(seed);
 
+
   startList = malloc(sizeof(struct listNode));
   if(startList == NULL) {
     fprintf(stderr, "ERROR: unable to allocate memory.\n");
@@ -49,7 +50,9 @@ int main(int argc, char** argv) {
 
         int totalTerms = 0;
 
+        //Add a new node to the linkedList, with insertBack handling both the new LL node and Trie for the corresponding page.
         insertBack(startList, startAddr, &totalTerms);
+        //Since the node added was just put after startList's original node, pTC has to be started on the node AFTER it. It does this for each node added.
         printTrieContents((goToEnd(startList))->root, displayArr, 0);
 
         n++;
@@ -61,9 +64,11 @@ int main(int argc, char** argv) {
         int found = getLink(startAddr, destArr, MAX_ADDR_LENGTH);
 
         if(found == 0) {
+        //found == 0 means that the link is invalid, so the loop has to be exited.
           break;
         }
 
+        //Copy the new (valid) destination to the array used to index, then do the indexing for it.
         strncpy(startAddr, destArr, MAX_ADDR_LENGTH);
       }
       else {
@@ -77,6 +82,7 @@ int main(int argc, char** argv) {
 
 }
 
+//Goes to the last element of the created linked list. Used to print out the Tries for each page indexed.
 struct listNode *goToEnd (struct listNode* given) {
   if(given->next == NULL) {
     return given;
