@@ -15,17 +15,17 @@ int contains(const struct listNode *pNode, const char *addr){
   return 0;
 }
 
-void insertBack(struct listNode *pNode, const char *addr){
+void insertBack(struct listNode *pNode, const char *addr, int* totalTerms){
   if(pNode->next == NULL) {
-    struct listNode *tempNode = (struct listNode*)malloc(sizeof(struct listNode));
+    struct listNode* tempNode = (struct listNode*)malloc(sizeof(struct listNode));
 
-    strcpy(tempNode->addr, addr);
-
+    strncpy(tempNode->addr, addr, strlen(addr));
     tempNode->next = NULL;
+    tempNode->root = indexPage(addr, totalTerms);
     pNode->next = tempNode;
   }
   else {
-    insertBack(pNode->next, addr);
+    insertBack(pNode->next, addr, totalTerms);
   }
 
 }
@@ -47,6 +47,7 @@ void destroyList(struct listNode *pNode){
 
   else {
     destroyList(pNode->next);
+    freeTrieMemory(pNode->root);
     free(pNode);
     return;
   }

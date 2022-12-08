@@ -17,7 +17,7 @@ struct listNode{
 
 
 int contains(const struct listNode *pNode, const char *addr);
-void insertBack(struct listNode *pNode, const char *addr);
+void insertBack(struct listNode *pNode, const char *addr, int* totalTerms);
 void printAddresses(const struct listNode *pNode);
 void destroyList(struct listNode *pNode);
 int getLink(const char* srcAddr, char* link, const int maxLinkLength);

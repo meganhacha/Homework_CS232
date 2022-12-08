@@ -4,9 +4,10 @@ OBJS = indexPage.o crawler.o
 CFILE = webSearch.c
 
 all: webSearch
-webSearch:
-	$(CC) $(CFLAGS) $(OBJS) $(CFILE) $< -o $@
+
 %.o: %.c $.h
 	$(CC) $(CFLAGS) -c $< -o $@
+webSearch: $(CFILE) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $< -o $@
 clean:
 	rm *.o webSearch
