@@ -41,6 +41,7 @@ struct trieNode* indexPage(const char* url, int* totalWords)
         if(singleWord[0] == 'b') {
           singleWord[1] = '\0';
           addWordOccurrence(singleWord, strlen(singleWord), root);
+          printf("\t%s\n", singleWord);
 
           stringLoc = 0;
         }
@@ -52,6 +53,7 @@ struct trieNode* indexPage(const char* url, int* totalWords)
           singleWord[stringLoc] = '\0';
 
           addWordOccurrence(singleWord, strlen(singleWord), root);
+          printf("\t%s\n", singleWord);
           totalWords++;
           stringLoc = 0;
       }
@@ -115,7 +117,6 @@ struct trieNode* current = root;
 
     //Mark the end of the displayArr string when a leaf is reached.
     displayArr[index] = '\0';
-    printf("\t%s\n", displayArr);
   }
 
   for(int i = 0; i < ALPHABET; i++) {

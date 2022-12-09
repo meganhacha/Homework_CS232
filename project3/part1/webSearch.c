@@ -7,7 +7,7 @@ int main(int argc, char** argv) {
   int n = 0;
   struct listNode* startList;
   char startAddr[MAX_ADDR_LENGTH];
-  char displayArr[MAX_CHARS];
+  // char displayArr[MAX_CHARS];
   char destArr[MAX_ADDR_LENGTH];
   char url[MAX_ADDR_LENGTH];
   FILE* fp;
@@ -24,7 +24,6 @@ int main(int argc, char** argv) {
 
   seed = atol(argv[3]);
   srand(seed);
-
 
   startList = malloc(sizeof(struct listNode));
   if(startList == NULL) {
@@ -52,8 +51,6 @@ int main(int argc, char** argv) {
 
         //Add a new node to the linkedList, with insertBack handling both the new LL node and Trie for the corresponding page.
         insertBack(startList, startAddr, &totalTerms);
-        //Since the node added was just put after startList's original node, pTC has to be started on the node AFTER it. It does this for each node added.
-        printTrieContents((goToEnd(startList))->root, displayArr, 0);
 
         n++;
       }
@@ -80,13 +77,4 @@ int main(int argc, char** argv) {
   fclose(fp);
   destroyList(startList);
 
-}
-
-//Goes to the last element of the created linked list. Used to print out the Tries for each page indexed.
-struct listNode *goToEnd (struct listNode* given) {
-  if(given->next == NULL) {
-    return given;
-  }
-
-  return(goToEnd(given->next));
 }
